@@ -26,8 +26,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       auth: {
         clientId: config.clientId,
         authority: `https://login.microsoftonline.com/${config.tenantId}`,
-        redirectUri: window.location.origin,
-        postLogoutRedirectUri: window.location.origin,
+        redirectUri: window.location.origin + window.location.pathname,
+        postLogoutRedirectUri: window.location.origin + window.location.pathname,
       },
       cache: {
         cacheLocation: 'localStorage',
