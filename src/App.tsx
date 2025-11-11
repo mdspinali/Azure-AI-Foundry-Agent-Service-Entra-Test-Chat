@@ -14,7 +14,7 @@ function AppContent() {
     <>
       <div className="app">
         <header className="app-header">
-          <h1>Azure AI Chat</h1>
+          <h1>Azure AI Foundry Agent Chat</h1>
           <button
             onClick={() => setShowSettings(true)}
             className="settings-button"

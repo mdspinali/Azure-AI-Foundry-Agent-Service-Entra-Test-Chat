@@ -91,7 +91,7 @@ Create an app registration in Azure Portal:
 3. **Supported account types**: Single tenant (or as needed)
 4. **Redirect URI**: 
    - Platform: **Single-page application (SPA)**
-   - URI: `http://localhost:5173` (for development) and your production URL
+   - URI: `http://localhost:5173` (for development) and your production URL. **IMPORTANT** If you plan to use this test page you MUST include the `https://mdspinali.github.io/Azure-AI-Foundry-Agent-Service-Entra-Test-Chat` as a redirect URI
 5. Click **Register**
 6. **Copy and save** the following from the Overview page:
    - **Application (client) ID** - You will need this for configuration
