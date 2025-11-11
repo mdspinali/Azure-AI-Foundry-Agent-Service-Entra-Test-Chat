@@ -1,0 +1,119 @@
+openapi: 3.0.1
+info:
+  title: agents-proxy
+  description: Pass-through proxy to Azure AI Foundry Agents (Assistants API)
+  version: '1.0'
+servers:
+  - url: <AI FOUNDRY PROJECT ENDPOINT>/agents
+paths:
+  '/{*path}':
+    get:
+      summary: Catch-all GET
+      description: Catch-all GET
+      operationId: catch_all_get
+      parameters:
+        - name: '*path'
+          in: path
+          description: "Catch-all path segment"
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Proxy response
+    post:
+      summary: Catch-all POST
+      description: Catch-all POST
+      operationId: catch_all_post
+      parameters:
+        - name: '*path'
+          in: path
+          description: "Catch-all path segment"
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema: { }
+          multipart/form-data: { }
+      responses:
+        '200':
+          description: Proxy response
+    put:
+      summary: Catch-all PUT
+      description: Catch-all PUT
+      operationId: catch_all_put
+      parameters:
+        - name: '*path'
+          in: path
+          description: "Catch-all path segment"
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema: { }
+      responses:
+        '200':
+          description: Proxy response
+    patch:
+      summary: Catch-all PATCH
+      description: Catch-all PATCH
+      operationId: catch_all_patch
+      parameters:
+        - name: '*path'
+          in: path
+          description: "Catch-all path segment"
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema: { }
+      responses:
+        '200':
+          description: Proxy response
+    delete:
+      summary: Catch-all DELETE
+      description: Catch-all DELETE
+      operationId: catch_all_delete
+      parameters:
+        - name: '*path'
+          in: path
+          description: "Catch-all path segment"
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Proxy response
+    options:
+      summary: Catch-all OPTIONS (CORS preflight)
+      description: Catch-all OPTIONS (CORS preflight)
+      operationId: catch_all_options
+      parameters:
+        - name: '*path'
+          in: path
+          description: "Catch-all path segment"
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Preflight OK
+components:
+  securitySchemes:
+    apiKeyHeader:
+      type: apiKey
+      name: Ocp-Apim-Subscription-Key
+      in: header
+    apiKeyQuery:
+      type: apiKey
+      name: subscription-key
+      in: query
+security:
+  - apiKeyHeader: [ ]
+  - apiKeyQuery: [ ]

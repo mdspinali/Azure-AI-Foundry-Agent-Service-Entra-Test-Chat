@@ -1,0 +1,51 @@
+<policies>
+    <inbound>
+        <!-- CORS first -->
+        <cors allow-credentials="false">
+            <allowed-origins>
+                <origin>WEB_APP_URL</origin>
+            </allowed-origins>
+            <allowed-methods>
+                <method>GET</method>
+                <method>POST</method>
+                <method>PUT</method>
+                <method>PATCH</method>
+                <method>DELETE</method>
+                <method>OPTIONS</method>
+            </allowed-methods>
+            <allowed-headers>
+                <header>*</header>
+            </allowed-headers>
+            <expose-headers>
+                <header>*</header>
+            </expose-headers>
+        </cors>
+        <!-- Skip auth for OPTIONS -->
+        <choose>
+            <when condition="@(!string.Equals(context.Request.Method, &quot;OPTIONS&quot;, System.StringComparison.OrdinalIgnoreCase))">
+                <validate-azure-ad-token tenant-id="TENANT_ID" failed-validation-httpcode="401">
+                    <audiences>
+                        <audience>https://ai.azure.com</audience>
+                    </audiences>
+                </validate-azure-ad-token>
+                <!-- Backend already includes /api/projects/... -->
+                <set-backend-service base-url="<Azure AI Foundry project endpoint>" />
+                <rewrite-uri template="@{
+                        var p = context.Request.MatchedParameters["path"];
+                        p = System.Uri.UnescapeDataString(p);
+                        return "/" + p;
+                    }" copy-unmatched-params="true" />
+            </when>
+        </choose>
+        <base />
+    </inbound>
+    <backend>
+        <base />
+    </backend>
+    <outbound>
+        <base />
+    </outbound>
+    <on-error>
+        <base />
+    </on-error>
+</policies>
